@@ -1,0 +1,29 @@
+{
+	"manifest_version": 2,
+	"name": "AussieBroadband Usage Charter",
+	"version": "1.0",
+	"permissions": [
+		"https://my.aussiebroadband.com.au/usage.php*"
+	],
+	"icons": {
+
+	},
+	"content_scripts": [
+
+		{
+			"run_at": "document_idle",
+			"matches": [
+				"https://my.aussiebroadband.com.au/usage.php*"
+			],
+			"js": [
+				"vendor/jQuery/jquery-3.2.1.min.js",
+				"vendor/ChartJS/Chart.min.js",
+				"vendor/Table2JSON/jquery.tabletojson.min.js",
+				"AussieBB.js"
+			]
+		}
+	],
+	"web_accessible_resources": [
+
+	]
+}
