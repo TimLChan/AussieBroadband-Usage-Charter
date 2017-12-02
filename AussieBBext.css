@@ -1,0 +1,7 @@
+#monthChart, #monthTotal {
+    padding-bottom: 5vh
+}
+
+#monthChart {
+    max-height: "500px"
+}

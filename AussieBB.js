@@ -1,12 +1,11 @@
-console.log('HELLO');
-
 $(function () {
-	$('table').before('<canvas id="monthChart" style="max-height: 500px;"></canvas><canvas id="monthTotal"></canvas>');
-	var aussieData = convertData();
-	console.log(aussieData);
-	buildBarChart(aussieData);
-	//buildDonutChart(aussieData);
-   
+	if (!document.querySelector("#login")) {
+		$('table').before('<canvas id="monthTotal"></canvas><canvas id="monthChart"></canvas>');
+		var aussieData = convertData();
+		buildBarChart(aussieData);
+		buildDonutChart(aussieData);
+	}
+
 });
 
 
@@ -35,17 +34,24 @@ function nextDate(dateStr) {
 
 function buildBarChart(data) {
 
+	var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 	var usagedate = [];
 	var usagedownload = [];
 	var usageupload = [];
+	var tempDate;
+
+	//Load the newly created JSON data into arrays for the date, download, and upload
 	for (i = 0; i < data.length - 3; i++) {
-		console.log(data[i].Date.length);
 		if (data[i].Date.length !== 10) {} else {
-			usagedate.push(data[i].Date);
+			// parse the date into a nicer* format. Code via https://stackoverflow.com/a/1643468
+			tempDate = toDate(data[i].Date);
+			usagedate.push(tempDate.getDate() + "-" + monthNames[tempDate.getMonth()]);
 			usagedownload.push(data[i].Download.replace(" GB", ""));
 			usageupload.push(data[i].Upload.replace(" GB", ""));
 		}
 	}
+
 
 	var ctx = document.getElementById('monthChart').getContext('2d');
 
@@ -88,7 +94,7 @@ function buildBarChart(data) {
 
 					label: function (tooltipItems, data) {
 						return data["datasets"][tooltipItems.datasetIndex]["label"] + ": " + tooltipItems.yLabel + ' GB';
-					}
+					},
 				}
 			},
 			scales: {
@@ -100,12 +106,15 @@ function buildBarChart(data) {
 						}
 					},
 					stacked: true
-
-
 				}],
 
 				xAxes: [{
-					stacked: true
+					//Change X-Axis display settings here
+					display: true,
+					stacked: true,
+					ticks: {
+						autoSkip: false
+					}
 				}]
 
 
@@ -126,15 +135,14 @@ function buildDonutChart(data) {
 	var percentusage;
 
 	var sliceddata = data.slice(-2);
-	totalusage = sliceddata[0].Column1;
-	totalusage = totalusage.replace(/.{1,2}strong>/g, "");
-
-	usageleft = sliceddata[1].Column1;
-	usageleft = usageleft.replace(/.{1,2}strong>/g, "");
+	totalusage = sliceddata[0].Download;
+	totalusage = totalusage.replace(" GB", "");
+	usageleft = sliceddata[1].Download;
+	usageleft = usageleft.replace(" GB", "");
 
 	percentusage = Math.floor((totalusage / (parseInt(totalusage) + parseInt(usageleft))) * 100);
 
-	daysthismonth = data[0].Column0;
+	daysthismonth = data[0].Date;
 	daysthismonth = ((nextDate(daysthismonth) - toDate(daysthismonth)) / 86400000) + 1;
 	dayselapsed = (data.length - 3);
 	daysremaining = daysthismonth - dayselapsed;
@@ -161,10 +169,6 @@ function buildDonutChart(data) {
 		options: {
 			legend: {
 				position: 'top',
-			},
-			title: {
-				display: true,
-				text: "Month's Usage"
 			},
 			animation: {
 				animateScale: true,
@@ -238,5 +242,3 @@ Chart.pluginService.register({
 		}
 	}
 });
-//$('.grid__nav ul li:eq(0)').append('<li class="menu__item">  <a class="menu__link" href="javascript:getDLs()" role="menuitem">    <i class="menu__icon  icon-Client_navigation_plusFilled"></i><span class="js-menu__text" data-test-id="menu-whats-new" data-i18n="t-menu-home">Get Download Links</span>  </a></li>');
-

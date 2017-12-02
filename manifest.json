@@ -20,6 +20,9 @@
 				"vendor/ChartJS/Chart.min.js",
 				"vendor/Table2JSON/jquery.tabletojson.min.js",
 				"AussieBB.js"
+			],
+			"css": [
+				"AussieBBext.css"
 			]
 		}
 	],
