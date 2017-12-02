@@ -17,6 +17,7 @@ Aaaaaand, you're done!
 You can change what you want included in the extension, whether it be removing the labels, or removing the charts
 
 **Removing Bar Chart X-Axis**
+
 ![Remove X-Axis Labels](https://i.imgur.com/6EdUPIF.png)
 1. To remove labels on the bar chart, look for the function "buildBarChart" in AussieBB.js
 2. Look for "display" in the "xAxes" 
@@ -24,6 +25,7 @@ You can change what you want included in the extension, whether it be removing t
 4. Save the file and reload the extension from chrome://extensions/
 
 **Removing Bar or Donut Chart**
+
 ![Removing Donut Chart](https://i.imgur.com/qGicADx.png)
 1. To remove one (or both) of the charts, head straight to the top of AussieBB.js
 2. Next to the chart you want to remove, add "//" without quotations
