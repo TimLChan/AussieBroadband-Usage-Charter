@@ -2,6 +2,12 @@
 Unofficial Chrome extension to chart AussieBroadband usage.
 **Note:** This is completely unsupported by AussieBroadband, and is essentially a more client side version of [MyAussie Usage Graphs](https://github.com/TimLChan/MyAussie-Usage-Graphs). 
 
+Screenshot
+----------
+![Usage Charted for AussieBB](https://i.imgur.com/k6xt26b.png)
+----------
+
+----------
 
 ## Getting Started ##
 So how do you use this? 
@@ -9,8 +15,9 @@ So how do you use this?
  1. Download the repo as a .ZIP
  2. Extract to any location
  3. Follow the [Load Unpacked Extensions](https://developer.chrome.com/extensions/getstarted#unpacked) guide from Chrome
+ 4. Head to [My Aussie](https://my.aussiebroadband.com.au/usage.php) and you'll see the graphs!
 
-Aaaaaand, you're done!
+Aaaaaand, you're done! There are no additional options or anything to change right now, and not sure if there will be in the future.
 
 
 ## Customisation ##
@@ -30,13 +37,6 @@ You can change what you want included in the extension, whether it be removing t
 1. To remove one (or both) of the charts, head straight to the top of AussieBB.js
 2. Next to the chart you want to remove, add "//" without quotations
 3. Save the file and reload the extension from chrome://extensions/
-
-----------
-
-Screenshot
-----------
-![Usage Charted for AussieBB](https://i.imgur.com/k6xt26b.png)
-----------
 
 
 ----------
